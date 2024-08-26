@@ -6,21 +6,25 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 // import { Skeleton } from "@/components/ui/skeleton";
 // import { Player } from "@lottiefiles/react-lottie-player";
-
- type questionT= 
-  {answers:string[],category:string,correct_answer:string,incorrect_answers:string[],difficulty:string,type:string}
+// interface QuestionT {
+//   incorrect_answers: string[];
+//   correct_answer: string;
+//   answers?: string[]; // Optional, if `answers` is not initially part of QuestionT
+// }
+type questionT =
+  { answers?: string[], category: string, correct_answer: string, incorrect_answers: string[], difficulty: string, type: string }
 
 export default function Quiz() {
   const [questions, setQuestions] = useState<any>(null);
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
-  const changeStatus = useQuizConfig((state:any) => state.changeStatus);
-  const config = useQuizConfig((state:any) => state.config);
-  const addLevel = useQuizConfig((state:any) => state.addLevel);
-  const addCategory = useQuizConfig((state:any) => state.addCategory);
-  const addType = useQuizConfig((state:any) => state.addType);
-  const addQuestionNumber = useQuizConfig((state:any) => state.addQuestionNumber);
-  const setScore = useQuizConfig((state:any) => state.setScore);
+  const changeStatus = useQuizConfig((state: any) => state.changeStatus);
+  const config = useQuizConfig((state: any) => state.config);
+  const addLevel = useQuizConfig((state: any) => state.addLevel);
+  const addCategory = useQuizConfig((state: any) => state.addCategory);
+  const addType = useQuizConfig((state: any) => state.addType);
+  const addQuestionNumber = useQuizConfig((state: any) => state.addQuestionNumber);
+  const setScore = useQuizConfig((state: any) => state.setScore);
 
   useEffect(() => {
     async function getQuestions() {
@@ -31,7 +35,7 @@ export default function Quiz() {
         )
       ).json();
       console.log(results)
-      let shuffledResults = results.map((e:questionT) => {
+      let shuffledResults = results.map((e: questionT) => {
         let value = [...e.incorrect_answers, e.correct_answer]
           .map((value) => ({ value, sort: Math.random() }))
           .sort((a, b) => a.sort - b.sort)
@@ -62,13 +66,14 @@ export default function Quiz() {
   return (
     <section className="flex flex-col justify-center items-center p-20 ">
       {questions?.length ? (
-        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
           Question No{" "}
-          <span className="text-blue-600 dark:text-blue-500">
+          <span className="text-white">
             #{config.numberOfQuestion - questions.length + 1}
           </span>
-          .
+
         </h1>
+
       ) : null}
       {loading && (
         <div className="flex flex-col">
@@ -79,7 +84,7 @@ export default function Quiz() {
       )}
 
       {!loading && !!questions?.length && (
-        <p className="text-2xl ">Score: {config.score}</p>
+        <p className="text-2xl text-white">Score: {config.score}</p>
       )}
 
       {!questions?.length && !loading && (
@@ -108,26 +113,29 @@ export default function Quiz() {
         </div>
       )}
 
-      {!questions && <p>loading...</p>}
+      {!questions && <p className="">loading...</p>}
       {!!questions && !!questions?.length && (
-        <section className="shadow-2xl my-10 p-10 w-[90%] rounded-lg flex flex-col justify-center items-center shadow-blue-200  ">
-          <h4 className="mb-4 text-center  text-xl font-extrabold leading-none tracking-tight md:text-2xl lg:text-4xl  text-blue-600 dark:text-blue-500">
+        <section className="my-10 p-10 w-[90%] rounded-lg flex flex-col justify-center items-center border border-white shadow-lg shadow-black">
+          <h5 className="mb-4 text-center text-xl font-extrabold leading-none tracking-tight md:text-2xl lg:text-4xl text-white dark:text-white">
             {questions[0].question}
-          </h4>
+          </h5>
+
           <div className="flex justify-evenly items-center w-full my-20 flex-wrap">
-            {questions[0].answers.map((e:string) => {
+            {questions[0].answers.map((e: string) => {
               return (
                 <button
                   key={e}
                   onClick={() => answerCheck(e)}
                   className={cn(
-                    "w-[40%] my-4 bg-white hover:bg-blue-600 hover:text-gray-100  text-gray-800 font-semibold py-4 px-4 shadow-blue-200   rounded-lg shadow-2xl",
+                    "w-[40%] my-4 bg-black text-white border border-white font-semibold py-4 px-4 rounded-lg shadow-lg shadow-black hover:bg-white hover:text-black",
                     {
-                      "bg-blue-600": !!answer && answer === e,
+                      "bg-white border-green-500 text-green-500": !!answer && answer === e, // Styles for the correct answer
+
+                      // "bg-blue-600": !!answer && answer === e,
                       "bg-red-600": !!answer && answer !== e,
-                      "hover:bg-blue-600": !!answer && answer === e,
-                      "hover:bg-red-600": !!answer && answer !== e,
-                      "text-gray-200": !!answer,
+                      // "hover:bg-blue-600": !!answer && answer === e,
+                      // "hover:bg-red-600": !!answer && answer !== e,
+                      // "text-gray-200": !!answer,
                     }
                   )}
                 >

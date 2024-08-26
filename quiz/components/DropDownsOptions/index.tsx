@@ -38,8 +38,8 @@ export default function DropdownOptions() {
             <section className="flex justify-evenly items-center py-5">
                 {/* Shadcdn */}
                 <div className="px-7 py-4 border-gray-100 border-2 rounded-xl w-1/3 mx-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex outline-none justify-between w-full">
+          <DropdownMenu> 
+            <DropdownMenuTrigger className="flex outline-none justify-between w-full  font-medium text-white ">
               {config.category.name ? config.category.name : "SELECT CATEGORY"}{" "}
               <ChevronDown />
             </DropdownMenuTrigger>
@@ -61,7 +61,7 @@ export default function DropdownOptions() {
 
                 <div className="px-7 py-4 border-gray-100 border-2 rounded-xl w-1/3 mx-4">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex outline-none justify-between w-full">
+            <DropdownMenuTrigger className="flex outline-none justify-between w-full font-medium text-white ">
               {config.level ? config.level : "SELECT LEVEL"} <ChevronDown />{" "}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -81,7 +81,7 @@ export default function DropdownOptions() {
         {/* Shadcdn */}
         <div className="px-7 py-4 border-gray-100 border-2 rounded-xl w-1/3 mx-4">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex outline-none justify-between w-full">
+            <DropdownMenuTrigger className="flex outline-none justify-between w-full  font-medium text-white ">
               {config.type ? config.type : "SELECT TYPE"} <ChevronDown />{" "}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
