@@ -7,7 +7,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key } from 'react';
+// import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key } from 'react';
 
 import { useQuizConfig } from "@/store";
 import { ChevronDown } from "lucide-react";
@@ -36,7 +36,6 @@ export default function DropdownOptions() {
     return (
         <>
             <section className="flex justify-evenly items-center py-5">
-                {/* Shadcdn */}
                 <div className="px-7 py-4 border-gray-100 border-2 rounded-xl w-1/3 mx-4">
           <DropdownMenu> 
             <DropdownMenuTrigger className="flex outline-none justify-between w-full  font-medium text-white ">
